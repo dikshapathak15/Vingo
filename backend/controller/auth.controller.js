@@ -71,7 +71,7 @@ export const signIn = async (req, res) => {
   }
 };
 
-export const singOut = async (params) => {
+export const singOut = async (req, res) => {
   try {
     res.clearCookie("token");
     return res.status(200).json({ message: "log out succesfully" });
