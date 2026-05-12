@@ -96,6 +96,13 @@ function SignIn() {
             </button>
           </div>
         </div>
+
+        <div className="text-right mb-4 text-[#ff4d2d]" onClick={()=>navigate("forget-password")}>
+          Forget Password
+        </div>
+
+
+
         <button
           className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`}
           onClick={handleSignIn}
