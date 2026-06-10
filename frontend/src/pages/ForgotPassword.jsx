@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState();
   const [otp, setOTP] = useState("");
   const [newpassword, setNewPassword] = useState("")
+  const [confirmpassword, setConfirmPassword] = useState("")
   const navigate = useNavigate();
   return (
     <div className="flex w-full items-center justify-center min-h-screen p-4 bg-[#fff9f6]">
@@ -87,8 +88,8 @@ const ForgotPassword = () => {
                 type="password"
                 className="w-full border-[1px] rounded-lg border-gray-200 px-3 py-2 focus:outline-none "
                 placeholder="Enter your OTP"
-                onChange={(e) => setOtp(e.target.value)}
-                value={otp}
+                onChange={(e) => setnewpassword(e.target.value)}
+                value={newpassword}
               />
             </div>
             <div className="mb-4">
@@ -102,8 +103,8 @@ const ForgotPassword = () => {
                 type="password"
                 className="w-full border-[1px] rounded-lg border-gray-200 px-3 py-2 focus:outline-none "
                 placeholder="Enter Confirm Password"
-                onChange={(e) => setOtp(e.target.value)}
-                value={otp}
+                onChange={(e) => setconfirmpassword(e.target.value)}
+                value={confirmpassword}
               />
             </div>
             <button
