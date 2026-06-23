@@ -38,6 +38,9 @@ function SignUp() {
   };
 
   const handleGoogleAuth = async () => {
+    if(!mobile){
+      return alert("mobile no is required")
+    }
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth,provider)
     console.log(result);
