@@ -43,7 +43,14 @@ function SignUp() {
     }
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth,provider)
-    console.log(result);
+  try {
+    const {data} = await axios.post(`${serverUrl}/api/auth/google-auth`, {fullName:result.user.displayName,
+      email:result.user.email, role,mobile
+    },{withCredentials:true})
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
     
   }
 
@@ -80,7 +87,7 @@ function SignUp() {
             placeholder="Enter your full name"
             style={{ border: `1px solid ${borderColor}` }}
             onChange={(e) => setFullName(e.target.value)}
-            value={fullName}
+            value={fullName} required
           />
         </div>
 
@@ -98,7 +105,7 @@ function SignUp() {
             placeholder="Enter your email"
             style={{ border: `1px solid ${borderColor}` }}
             onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            value={email} required
           />
         </div>
 
@@ -116,7 +123,7 @@ function SignUp() {
             placeholder="Enter your mobile no"
             style={{ border: `1px solid ${borderColor}` }}
             onChange={(e) => setMobile(e.target.value)}
-            value={mobile}
+            value={mobile} required
           />
         </div>
 
@@ -135,7 +142,7 @@ function SignUp() {
               placeholder="Enter your Password"
               style={{ border: `1px solid ${borderColor}` }}
               onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              value={password} required
             />
             <button
               className="absolute right-3 top-[14px] text-gray-500"
