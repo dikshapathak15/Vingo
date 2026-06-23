@@ -30,7 +30,7 @@ function SignIn() {
       );
       console.log(result);
     } catch (error) {
-      console.log(error.response.data);;
+      console.log(error);
     }
   };
 

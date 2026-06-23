@@ -95,9 +95,13 @@ export const sendOtp = async(req,res)=>{
     user.isOtpVerified = false
     await user.save()
     await sendOtpMail(email, otp)
-    return res.status(200).json({"Otp sent successfully"})
+    return res.status(200).json({message: "Otp sent successfully"})
   }catch(error){
-    return res.status(500).json(`send otp error ${error}`);
+    console.error("send otp error", error);
+    return res.status(500).json({
+      success:false,
+      message: error.message
+    });
   }
 }
 
@@ -111,7 +115,8 @@ export const verifyOtp = async(req,res)=>{
     user.isOtpVerified = true
     user.resetOtp = undefined
     user.otpExpires = undefined
-        return res.status(200).json({"Otp verify successfully"})
+    await user.save()
+        return res.status(200).json({message :"Otp verify successfully"})
   } catch (error) {
     return res.status(500).json(`verify otp error ${error}`);
   }
