@@ -8,6 +8,7 @@ import { serverUrl } from "../App.jsx";
 import { signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth} from "../../firebase.js"
+import {ClipLoader } from "react-spinners";
 
 function SignUp() {
   const primaryColor = "#ff4d2d";
@@ -24,8 +25,10 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
+    setLoading(true)
     try {
       const result = await axios.post(
         `${serverUrl}/api/auth/signup`,
@@ -34,8 +37,10 @@ function SignUp() {
       );
       console.log(result);
       setError("")
+      setLoading(false)
     } catch (error) {
-      setError(error.response.data.message);;
+      setError(error.response.data.message);
+      setLoading(false)
     }
   };
 
@@ -184,9 +189,9 @@ function SignUp() {
         </div>
         <button
           className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`}
-          onClick={handleSignUp}
+          onClick={handleSignUp} disabled={loading}
         >
-          Sign Up
+         {loading?<ClipLoader size={20} color="white"/>:"SignUp"}
         </button>
 
         <p className="text-red-500 text-center my-[10px]">{error}</p>

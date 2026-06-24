@@ -3,6 +3,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { serverUrl } from "../App";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);
@@ -12,32 +13,45 @@ const ForgotPassword = () => {
   const [confirmpassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+ 
 
 
   const handleSendOtp = async() =>{
+    setLoading(true)
     try {
       const result = await axios.post(`${serverUrl}/api/auth/send-otp`, {email}, {withCredentials:true})
       console.log(result)
       setError("")
       setStep(2)
+      setError(false)
+       setLoading(false)
     } catch (error) {
          setError(error.response.data.message);
+             setError(false)
+             setLoading(false)
     }
   }
 
 
   const handleVerifyOtp = async() =>{
+    setLoading(true)
     try {
       const result = await axios.post(`${serverUrl}/api/auth/verify-otp`, {email,otp}, {withCredentials:true})
       console.log(result)
       setError("")
       setStep(3)
+          setError(false)
+          setLoading(false)
     } catch (error) {
          setError(error.response.data.message);
+             setError(false)
+             setLoading(false)
     }
   }
 
   const handleResetPassword = async() =>{
+    setLoading(true)
     if(newpassword != confirmpassword){
       return null
     }
@@ -45,9 +59,13 @@ const ForgotPassword = () => {
       const result = await axios.post(`${serverUrl}/api/auth/reset-password`, {email, newpassword}, {withCredentials:true})
       console.log(result)
       setError("")
+          setError(false)
+          setLoading(false)
     navigate("/signin")
     } catch (error) {
            setError(error.response.data.message);
+               setError(false)
+               setLoading(false)
     }
   }
 
@@ -83,10 +101,10 @@ const ForgotPassword = () => {
               />
             </div>
             <button
-              className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`}
-              onClick={handleSendOtp}
+              className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`} 
+              onClick={handleSendOtp} disabled={loading}
             >
-              Send Otp
+              {loading?<ClipLoader size={20} color="white"/>:"Send Otp"}
             </button>
             
         <p className="text-red-500 text-center my-[10px]">{error}</p>
@@ -113,9 +131,9 @@ const ForgotPassword = () => {
             </div>
             <button
               className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`}
-                            onClick={handleVerifyOtp}
+                            onClick={handleVerifyOtp} disabled={loading}
             >
-              Verify
+               {loading?<ClipLoader size={20} color="white"/>:"Verify"}
             </button>
             
         <p className="text-red-500 text-center my-[10px]">{error}</p>
@@ -157,9 +175,9 @@ const ForgotPassword = () => {
             </div>
             <button
               className={`w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`}
-                            onClick={handleResetPassword}
+                            onClick={handleResetPassword} disabled={loading}
             >
-              Reset Password
+              {loading?<ClipLoader size={20} color="white"/>:"Reset Password"}
             </button>
             
         <p className="text-red-500 text-center my-[10px]">{error}</p>
