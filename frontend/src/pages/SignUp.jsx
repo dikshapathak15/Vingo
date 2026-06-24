@@ -23,6 +23,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
+   const [error, setError] = useState("");
 
   const handleSignUp = async () => {
     try {
@@ -32,14 +33,15 @@ function SignUp() {
         { withCredentials: true },
       );
       console.log(result);
+      setError("")
     } catch (error) {
-      console.log(error.response.data);;
+      setError(error.response.data.message);;
     }
   };
 
   const handleGoogleAuth = async () => {
     if(!mobile){
-      return alert("mobile no is required")
+      return setError("mobile number is required")
     }
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth,provider)
@@ -186,6 +188,10 @@ function SignUp() {
         >
           Sign Up
         </button>
+
+        <p className="text-red-500 text-center my-[10px]">{error}</p>
+
+
         <button className="w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 border-gray-400 hover:bg-gray-100 cursor-pointer" onClick={handleGoogleAuth}>
           <FcGoogle size={20} />
           <span>Sign Up with Google</span>

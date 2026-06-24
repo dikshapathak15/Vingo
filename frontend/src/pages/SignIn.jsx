@@ -15,13 +15,14 @@ function SignIn() {
   const borderColor = "#ddd";
 
   const [showPassword, setShowPassword] = useState(false);
+ 
 
   
   const navigate = useNavigate();
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+const [error, setError] = useState("");
 
   const handleSignIn = async () => {
     try {
@@ -31,8 +32,9 @@ function SignIn() {
         { withCredentials: true },
       );
       console.log(result);
+      setError("")
     } catch (error) {
-      console.log(error);
+     setError(error.response.data.message);
     }
   };
 
@@ -126,6 +128,10 @@ function SignIn() {
         >
           Sign In
         </button>
+
+       
+        <p className="text-red-500 text-center my-[10px]">{error}</p>
+
         <button className="w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 border-gray-400 hover:bg-gray-100 cursor-pointer" onClick={handleGoogleAuth}>
           <FcGoogle size={20} />
           <span>Sign In with Google</span>

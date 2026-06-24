@@ -10,6 +10,7 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   const [newpassword, setNewPassword] = useState("")
   const [confirmpassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
 
@@ -17,9 +18,10 @@ const ForgotPassword = () => {
     try {
       const result = await axios.post(`${serverUrl}/api/auth/send-otp`, {email}, {withCredentials:true})
       console.log(result)
+      setError("")
       setStep(2)
     } catch (error) {
-      console.log(error)
+         setError(error.response.data.message);
     }
   }
 
@@ -28,9 +30,10 @@ const ForgotPassword = () => {
     try {
       const result = await axios.post(`${serverUrl}/api/auth/verify-otp`, {email,otp}, {withCredentials:true})
       console.log(result)
+      setError("")
       setStep(3)
     } catch (error) {
-      console.log(error)
+         setError(error.response.data.message);
     }
   }
 
@@ -41,10 +44,10 @@ const ForgotPassword = () => {
     try {
       const result = await axios.post(`${serverUrl}/api/auth/reset-password`, {email, newpassword}, {withCredentials:true})
       console.log(result)
+      setError("")
     navigate("/signin")
     } catch (error) {
-      console.log("Status: ",error.response?.status);
-      console.log("Response: ",error.response?.data);
+           setError(error.response.data.message);
     }
   }
 
@@ -85,6 +88,8 @@ const ForgotPassword = () => {
             >
               Send Otp
             </button>
+            
+        <p className="text-red-500 text-center my-[10px]">{error}</p>
           </div>
         )}
 
@@ -112,6 +117,8 @@ const ForgotPassword = () => {
             >
               Verify
             </button>
+            
+        <p className="text-red-500 text-center my-[10px]">{error}</p>
           </div>
         )}
 
@@ -154,6 +161,8 @@ const ForgotPassword = () => {
             >
               Reset Password
             </button>
+            
+        <p className="text-red-500 text-center my-[10px]">{error}</p>
           </div>
         )}
       </div>
