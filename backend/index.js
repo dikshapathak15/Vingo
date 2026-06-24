@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json())  //global middleware
 app.use(cookieParser())
 app.use("/api/auth", authRouter)
-app.use("/api/auth", userRouter)
+app.use("/api/user", userRouter)
 
 app.listen(port,()=>{
     connectDb()

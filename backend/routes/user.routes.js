@@ -1,11 +1,12 @@
 import express from "express"
 import { getCurrentUser } from "../controller/user.controller.js"
 import isAuth from "../middleware/isAuth.js"
+import authRouter from "./auth.routes.js"
 
 
 const userRouter = express.Router()
 
-authRouter.get("/current" ,isAuth, getCurrentUser)
+userRouter.get("/current" ,isAuth, getCurrentUser)
 
 
 
