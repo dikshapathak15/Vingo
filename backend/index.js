@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 dotenv.config()
 import cors from "cors";
+import userRouter from "./routes/user.routes.js";
 const app = express();   
 const port = process.env.PORT || 5000
 app.use(cors({
@@ -15,6 +16,7 @@ app.use(cors({
 app.use(express.json())  //global middleware
 app.use(cookieParser())
 app.use("/api/auth", authRouter)
+app.use("/api/auth", userRouter)
 
 app.listen(port,()=>{
     connectDb()
