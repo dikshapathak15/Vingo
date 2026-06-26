@@ -1,9 +1,10 @@
 import React from 'react'
+import Nav from "./Nav"
 
-const userDashboard = () => {
+function UserDashboard  ()  {
   return (
-    <div>userDashboard</div>
+    <div><Nav/></div>
   )
 }
 
-export default userDashboard
+export default UserDashboard
