@@ -37,8 +37,8 @@ function SignUp() {
         `${serverUrl}/api/auth/signup`,
         { fullName, email, password, mobile, role },
         { withCredentials: true },
-        dispatch(setUserData(result.data))
       );
+      dispatch(setUserData(result.data))
       setError("")
       setLoading(false)
     } catch (error) {
