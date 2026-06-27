@@ -1,5 +1,6 @@
 import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { IoIosSearch } from "react-icons/io";
 
 function Nav() {
   return (
@@ -11,6 +12,8 @@ function Nav() {
         <div className="flex items-center w-[30%] overflow-hidden gap-[10px] px-[10px] border-r-[2px] border-gray-400">
             <FaLocationDot size={25} className="text-[#ff4d2d]" />
         <div className="w-[80%] truncate text-gray-600 ">jhansi</div>
+        <div><IoIosSearch />
+        <input type="text placeholder='search delicious food....' " /></div>
         </div>
       </div>
     </div>
