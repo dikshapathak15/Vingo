@@ -18,9 +18,9 @@ function Nav() {
         <input type="text" placeholder='search delicious food....' className="px-[10px] text-gray-700 ouline-0 w-full" />
         </div>
       </div>
-      <div>
+      <div className="relative cursor-pointer">
         <FiShoppingCart size={25} className="text-[#ff4d2d]" />
-        <span className="absolute right text-[#ff4d2d]">0</span>
+        <span className="absolute right-[-9px] top-[-12px] text-[#ff4d2d]">0</span>
       </div>
     </div>
   );
