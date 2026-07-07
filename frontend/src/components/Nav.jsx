@@ -20,8 +20,9 @@ function Nav() {
       </div>
       <div className="relative cursor-pointer">
         <FiShoppingCart size={25} className="text-[#ff4d2d]" />
-        <span className="absolute right-[-9px] top-[-12px] text-[#ff4d2d]">0</span>
+        <span className="absolute right-[-9px] top-[-12px] text-[#ff4d2d] font-medium">0</span>
       </div>
+      <button className="hidden md:block px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium ">My Orders</button>
     </div>
   );
 }
