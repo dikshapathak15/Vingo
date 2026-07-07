@@ -2,9 +2,11 @@ import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { FiShoppingCart } from "react-icons/fi";
+import { useSelector } from "react-redux"
 
 
 function Nav() {
+  const {userData} = useSelector(state=>state.user)
   return (
     <div className="w-full h-[80px] flex items-center justify-center md:justify-center gap-[30px] px-[20px] fixed top-0 left-0 z-[9999] bg-[#fff9f6] overflow-visible">
       <h1 className="text-3xl font-bold mb-2 text-[#ff4d2d]">
@@ -23,6 +25,7 @@ function Nav() {
         <span className="absolute right-[-9px] top-[-12px] text-[#ff4d2d] font-medium">0</span>
       </div>
       <button className="hidden md:block px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium ">My Orders</button>
+      <div className="w-[40px] h-[40px] rounded-full flex items-center justify-center bg-[#ff4d2d] text-white text-[18px] shadow-xl font-semibold cursor-pointer">{userData?.fullName.slice(0,1)}</div>
     </div>
   );
 }
