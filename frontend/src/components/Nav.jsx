@@ -2,13 +2,26 @@ import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { FiShoppingCart } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ImCross } from "react-icons/im";
+import { serverUrl } from "../App";
+import { setUserData } from "../redux/userSlice";
+import axios from "axios";
 
 function Nav() {
-  const { userData } = useSelector((state) => state.user);
+  const { userData, city } = useSelector((state) => state.user);
   const [showInfo, setShowInfo] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const dispatch = useDispatch();
+  const handleLogOut = async() =>{
+    try {
+      const result = await axios.get(`${serverUrl}/api/auth/signout` , {withCredentials:true});
+      dispatch(setUserData(null))
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className="w-full h-[80px] flex items-center justify-center md:justify-center gap-[30px] px-[20px] fixed top-0 left-0 z-[9999] bg-[#fff9f6] overflow-visible">
       {showSearch && (
@@ -31,7 +44,7 @@ function Nav() {
       <div className="w-[60%] md:w-[60%] lg:w-[40%] h-[70px] bg-white shadow-xl rounded-lg items-center gap-[20px] hidden md:flex">
         <div className="flex items-center w-[30%] overflow-hidden gap-[10px] px-[10px] border-r-[2px] border-gray-400">
           <FaLocationDot size={25} className="text-[#ff4d2d]" />
-          <div className="w-[80%] truncate text-gray-600 ">jhansi</div>
+          <div className="w-[80%] truncate text-gray-600 ">{city}</div>
         </div>
         <div className="w-[80%] flex items-center gap-[10px]">
           <IoIosSearch size={25} className="text-[#ff4d2d] " />
@@ -66,7 +79,7 @@ function Nav() {
             <div className="md:hidden text-[#ff4d2d] font-semibold cursor-pointer">
               My Orders
             </div>
-            <div className="text-[#ff4d2d] font-semibold cursor-pointer">
+            <div className="text-[#ff4d2d] font-semibold cursor-pointer" onClick={handleLogOut}>
               Log Out
             </div>
           </div>
