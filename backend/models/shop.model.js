@@ -36,5 +36,5 @@ const shopSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const shop = mongoode.model("Shop", shopSchema)
-export default shop;
+const Shop = mongoode.model("Shop", shopSchema)
+export default Shop;
