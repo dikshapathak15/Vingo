@@ -1,8 +1,10 @@
 import React from 'react'
+import Nav from './Nav'
 
 const ownerDashboard = () => {
   return (
-    <div></div>
+    <div><Nav>
+      </Nav></div>
   )
 }
 
