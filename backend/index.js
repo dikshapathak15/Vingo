@@ -6,6 +6,8 @@ import authRouter from "./routes/auth.routes.js";
 dotenv.config()
 import cors from "cors";
 import userRouter from "./routes/user.routes.js";
+import shopRouter from "./routes/shop.routes.js";
+import itemRouter from "./routes/items.routes.js";
 const app = express();   
 const port = process.env.PORT || 5000
 app.use(cors({
@@ -17,6 +19,8 @@ app.use(express.json())  //global middleware
 app.use(cookieParser())
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
+app.use("/api/shop", shopRouter)
+app.use("/api/item", itemRouter)
 
 app.listen(port,()=>{
     connectDb()
