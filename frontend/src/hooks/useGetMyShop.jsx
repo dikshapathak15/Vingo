@@ -3,6 +3,7 @@ import { serverUrl } from "../App";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice";
+import { setMyShopData } from "../redux/ownerSlice";
 
 function useGetMyShop() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function useGetMyShop() {
         const result = await axios.get(`${serverUrl}/api/shop/get-my`, {
           withCredentials: true,
         });
-       dispatch(setUserData(result.data))
+       dispatch(setMyShopData(result.data))
       } catch (error) {
         console.log(error)
       }
