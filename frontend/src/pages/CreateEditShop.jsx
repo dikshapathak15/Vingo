@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { FaUtensils } from "react-icons/fa";
@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 function CreateEditShop() {
   const navigate = useNavigate();
   const { myShopData } = useSelector((state) => state.owner);
+  const {name,setName} =useState(myShopData.name || "")
+  const {address,setAddress} =useState(myShopData.address || "")
+  const {city,setCity} =useState(myShopData.city || "")
 
   return (
     <div className="flex justify-center flex-col items-center p-6 bg-gradient-to-br from-orange-50 relative to-white min-h-screen">
