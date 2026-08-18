@@ -7,9 +7,11 @@ import { useSelector } from "react-redux";
 function CreateEditShop() {
   const navigate = useNavigate();
   const { myShopData } = useSelector((state) => state.owner);
+  const { currentCity, currentState, currentAddress } = useSelector((state) => state.user);
   const {name,setName} =useState(myShopData.name || "")
-  const {address,setAddress} =useState(myShopData.address || "")
-  const {city,setCity} =useState(myShopData.city || "")
+  const {address,setAddress} =useState(myShopData.address || currentAddress)
+  const {city,setCity} =useState(myShopData.city ||currentCity)
+  const {state,setState} =useState(myShopData.city ||currentState)
 
   return (
     <div className="flex justify-center flex-col items-center p-6 bg-gradient-to-br from-orange-50 relative to-white min-h-screen">
@@ -38,6 +40,7 @@ function CreateEditShop() {
               type="text"
               placeholder="Enter Shop Name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+              onChange={(e)=> setName(e.target.value)} value={name}
             />
           </div>
           <div>
